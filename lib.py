@@ -53,3 +53,9 @@ def sample_dense_sparse(n, n_dense, n_sparse):
     out[:, :n_dense] = np.random.normal(0,1, (n,n_dense))
     out[:, n_dense:(n_dense+n_sparse)] = np.random.laplace(0,1, (n,n_sparse))
     return(out)
+
+###########################Gumbel########################################
+def gumbel_soft(pi, g, tau=.1):
+    logit = tf.log(pi)
+    y = tf.nn.softmax((g+logit)/tau, axis = 2)
+    return(y)
